@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'visitors',
 ]
 AUTH_USER_MODEL = 'accounts.User'
+LOGIN_REDIRECT_URL = 'home'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
