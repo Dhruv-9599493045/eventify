@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ event.title }} - Eventify{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {% if event.banner_image %}
+            <img src="{{ event.banner_image.url }}" class="img-fluid rounded mb-4" alt="{{ event.title }}">
+        {% endif %}
+
+        <h1>{{ event.title }}</h1>
+        <p class="text-muted">Hosted by {{ event.organizer.org_name }}</p>
+
+        <hr>
+
+        <h5>About this event</h5>
+        <p>{{ event.description|linebreaks }}</p>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Event Details</h5>
+                <p><strong>Venue:</strong> {{ event.venue }}</p>
+                <p><strong>Starts:</strong> {{ event.start_date }}</p>
+                <p><strong>Ends:</strong> {{ event.end_date }}</p>
+                {% if event.category %}
+                    <p><strong>Category:</strong> {{ event.category }}</p>
+                {% endif %}
+                <a href="#" class="btn btn-primary w-100">Register Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
