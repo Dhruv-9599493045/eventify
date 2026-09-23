@@ -28,7 +28,7 @@
                 {% if event.category %}
                     <p><strong>Category:</strong> {{ event.category }}</p>
                 {% endif %}
-                <a href="#" class="btn btn-primary w-100">Register Now</a>
+                <a href="{% url 'register_for_event' event.pk %}" class="btn btn-primary w-100">Register Now</a>
             </div>
         </div>
     </div>
