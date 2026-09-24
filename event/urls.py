@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('events.urls')),
     path('accounts/',include('accounts.urls')),
     path('visitor/' ,include('visitors.urls')),
+    path('organizations/' ,include('organizations.urls')),
 ]
 
 if settings.DEBUG:

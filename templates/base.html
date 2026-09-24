@@ -13,6 +13,9 @@
         <a class = "navbar brand" href="{% url 'home' %}"> Eventify </a>
         {% if user.is_authenticated %}
         <span class="nav-link text-white">Hi, {{ user.username }} ({{ user.role }})</span>
+        {% if user.role == 'organization' %}
+            <a class="nav-link text-white" href="{% url 'org_dashboard'%}">Dashboard</a>
+        {% endif %}
         <form method="POST" action="{% url 'logout' %}" class="d-inline">
             {% csrf_token %}
             <button type="submit" class="nav-link text-white btn btn-link">Logout</button>
