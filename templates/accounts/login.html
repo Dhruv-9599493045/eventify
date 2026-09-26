@@ -3,14 +3,28 @@
 {% block title %}Login - Eventify{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2 class="mb-4">Login</h2>
-        <form method="POST">
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2>Welcome back</h2>
+        <p class="auth-subtitle">Log in to manage your events or registrations.</p>
+
+        <form method="POST" novalidate>
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
+            </div>
+            {% if form.errors %}
+                <div class="field-error mb-2">Invalid username or password.</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-pill w-100 mt-2">Login →</button>
         </form>
+
+        <p class="auth-footer">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
     </div>
 </div>
 {% endblock %}
