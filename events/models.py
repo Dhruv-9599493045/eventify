@@ -31,3 +31,23 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Session(models.Model):
+    event = models.ForeignKey(
+        Event,
+        on_delete = models.CASCADE,
+        related_name = 'sessions'
+    )
+    title = models.CharField(max_length=200)
+    speaker = models.CharField(max_length=200, blank=True)
+    venue = models.CharField(max_length=255, blank=True)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    capacity = models.PositiveIntegerField(default = 0, help_text = "0 means unlimited")
+
+    class Meta:
+        ordering = ['start_time']
+
+    def __str__(self):
+        return f"{self.title} ({self.event.title})"
+    

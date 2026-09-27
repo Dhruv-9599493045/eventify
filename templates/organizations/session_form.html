@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Session - Eventify{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2>Add Session</h2>
+        <p class="auth-subtitle">For: {{ event.title }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-pill w-100 mt-2">Save Session →</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

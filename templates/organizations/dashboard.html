@@ -15,6 +15,7 @@
             <th>Venue</th>
             <th>Start Date</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
             <td>{{ event.venue }}</td>
             <td>{{ event.start_date }}</td>
             <td><span class="badge bg-secondary">{{ event.get_status_display }}</span></td>
+            <td><a href="{% url 'add_session' event.pk %}" class="btn btn-sm btn-outline-primary">+ Session</a></td>
         </tr>
         {% empty %}
         <tr><td colspan="4">You haven't created any events yet.</td></tr>

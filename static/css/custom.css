@@ -316,3 +316,111 @@ h1 {
     font-weight: 600;
     text-decoration: none;
 }
+
+/* Event Hero */
+.event-hero {
+    position: relative;
+    height: 380px;
+    border-radius: 20px;
+    background-color: #0f172a;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.event-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.15) 70%);
+}
+
+.event-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem;
+    color: #ffffff;
+}
+
+.event-hero-content h1 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin: 0.6rem 0 0.3rem;
+}
+
+.event-hero-content p {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+/* Detail grid */
+.event-detail-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .event-detail-grid { grid-template-columns: 1fr; }
+}
+
+.event-detail-main h5 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.event-detail-main p {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.event-info-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+    position: sticky;
+    top: 6rem;
+}
+
+.event-info-card h5 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.event-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.event-info-row:last-of-type {
+    border-bottom: none;
+}
+
+.event-info-row span {
+    color: var(--text-muted);
+}
+
+.session-item {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.session-item:last-child {
+    border-bottom: none;
+}
+
+.session-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}

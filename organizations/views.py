@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Organization
-from .forms import EventForm
+from .models import Organization 
+from .forms import EventForm , SessionForm
+from events.models import Event , Session
 
 @login_required
 def dashboard(request):
@@ -34,3 +35,21 @@ def create_event(request):
         form = EventForm()
 
     return render(request, 'organizations/event_form.html', {'form': form})
+
+@login_required
+def add_session(request, event_pk):
+    organization = get_object_or_404(Organization, user=request.user)
+    event = get_object_or_404(Event, pk=event_pk, organizer=organization)
+
+    if request.method == 'POST':
+        form = SessionForm(request.POST)
+        if form.is_valid():
+            session = form.save(commit=False)
+            session.event = event
+            session.save()
+            messages.success(request, "Session added successfully!")
+            return redirect('org_dashboard')
+    else:
+        form = SessionForm()
+
+    return render(request, 'organizations/session_form.html', {'form': form, 'event': event})
