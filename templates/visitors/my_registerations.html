@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}My Registrations - Eventify{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Registrations</h1>
+
+<div class="registration-list">
+    {% for reg in registrations %}
+    <div class="registration-card">
+        <div class="registration-info">
+            <h5>{{ reg.event.title }}</h5>
+            <p class="text-muted mb-1">{{ reg.event.venue }}</p>
+            <p class="text-muted mb-0">{{ reg.event.start_date|date:"M d, Y, g:i A" }}</p>
+            {% if reg.checked_in %}
+                <span class="badge-checked">✓ Checked In</span>
+            {% else %}
+                <span class="badge-pending">Not checked in yet</span>
+            {% endif %}
+        </div>
+        <div class="registration-qr">
+            <img src="{% url 'registration_qr' reg.badge_id %}" alt="QR Code" width="110" height="110">
+            <span>Show this at entry</span>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">You haven't registered for any events yet. <a href="{% url 'home' %}">Browse events →</a></p>
+    {% endfor %}
+</div>
+{% endblock %}
