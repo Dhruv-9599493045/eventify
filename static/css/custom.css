@@ -424,3 +424,23 @@ h1 {
     color: var(--text-muted);
     margin-top: 0.2rem;
 }
+
+.field-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+.btn-text-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.btn-text-link:hover {
+    color: var(--primary);
+}
