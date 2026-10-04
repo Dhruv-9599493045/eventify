@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Event - Eventify{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2>Delete Event</h2>
+        <p class="auth-subtitle">
+            Are you sure you want to delete <strong>"{{ event.title }}"</strong>?
+            This will also remove all its sessions and visitor registrations. This cannot be undone.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger w-100 mb-2">Yes, Delete Event</button>
+            <a href="{% url 'org_dashboard' %}" class="btn-text-link">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

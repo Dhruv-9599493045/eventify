@@ -26,6 +26,11 @@
             <td>{{ event.start_date }}</td>
             <td><span class="badge bg-secondary">{{ event.get_status_display }}</span></td>
             <td><a href="{% url 'add_session' event.pk %}" class="btn btn-sm btn-outline-primary">+ Session</a></td>
+            <td>
+                
+                <a href="{% url 'edit_event' event.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'delete_event' event.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
         </tr>
         {% empty %}
         <tr><td colspan="4">You haven't created any events yet.</td></tr>
