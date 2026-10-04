@@ -19,12 +19,38 @@
             {% endif %}
         </div>
         <div class="registration-qr">
-            <img src="{% url 'registration_qr' reg.badge_id %}" alt="QR Code" width="110" height="110">
-            <span>Show this at entry</span>
+            <img src="{% url 'registration_qr' reg.badge_id %}"
+                 alt="QR Code"
+                 width="110" height="110"
+                 class="qr-thumb"
+                 onclick="openQrModal(this.src, '{{ reg.event.title|escapejs }}')">
+            <span>Tap to enlarge</span>
         </div>
     </div>
     {% empty %}
     <p class="text-muted">You haven't registered for any events yet. <a href="{% url 'home' %}">Browse events →</a></p>
     {% endfor %}
 </div>
+
+<div id="qr-modal-overlay" class="qr-modal-overlay" onclick="closeQrModal(event)">
+    <div class="qr-modal-card">
+        <button class="qr-modal-close" onclick="closeQrModal(event)">&times;</button>
+        <img id="qr-modal-img" src="" alt="QR Code">
+        <p id="qr-modal-title"></p>
+    </div>
+</div>
+
+<script>
+function openQrModal(src, title) {
+    document.getElementById('qr-modal-img').src = src;
+    document.getElementById('qr-modal-title').textContent = title;
+    document.getElementById('qr-modal-overlay').classList.add('active');
+}
+
+function closeQrModal(event) {
+    if (event.target.id === 'qr-modal-overlay' || event.target.classList.contains('qr-modal-close')) {
+        document.getElementById('qr-modal-overlay').classList.remove('active');
+    }
+}
+</script>
 {% endblock %}
