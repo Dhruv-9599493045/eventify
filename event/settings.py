@@ -142,9 +142,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('f921fplv'),
-    'API_KEY': config('953354221789261'),
-    'API_SECRET': config('bNjqLIeCgPpl5Ahs18Aunb5NoJg'),
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 
 STORAGES = {
