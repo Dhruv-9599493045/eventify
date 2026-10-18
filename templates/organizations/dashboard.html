@@ -38,6 +38,7 @@
                     <a href="{% url 'add_session' event.pk %}" class="btn btn-sm btn-outline-primary">+ Session</a>
                     <a href="{% url 'edit_event' event.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
                     <a href="{% url 'delete_event' event.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    <a href="{% url 'assign_manager' event.pk %}" class="btn btn-sm btn-outline-dark">Managers</a>
                 </td>
             </tr>
             {% empty %}

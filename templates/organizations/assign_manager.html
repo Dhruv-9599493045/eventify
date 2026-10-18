@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Event Managers - Eventify{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card" style="max-width: 560px;">
+        <h2>Event Managers</h2>
+        <p class="auth-subtitle">For: <strong>{{ event.title }}</strong></p>
+
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Manager's username</label>
+                <input type="text" id="username" name="username" placeholder="e.g. rahul_manager" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-pill w-100">Assign Manager →</button>
+        </form>
+
+        <hr class="my-4">
+
+        <h5>Currently assigned</h5>
+        {% for a in assignments %}
+            <div class="session-item d-flex justify-content-between align-items-center">
+                <span>{{ a.manager.username }}</span>
+                <form method="POST" action="{% url 'remove_manager' a.pk %}" class="m-0">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                </form>
+            </div>
+        {% empty %}
+            <p class="text-muted">No managers assigned yet.</p>
+        {% endfor %}
+
+        <a href="{% url 'org_dashboard' %}" class="btn-text-link">← Back to dashboard</a>
+    </div>
+</div>
+{% endblock %}

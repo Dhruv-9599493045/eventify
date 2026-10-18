@@ -4,6 +4,10 @@ from django.contrib import messages
 from .models import Organization 
 from .forms import EventForm , SessionForm
 from events.models import Event , Session
+from django.contrib.auth import get_user_model
+from managers.models import EventManagerAssignment
+
+User = get_user_model()
 
 @login_required
 def dashboard(request):
@@ -81,3 +85,41 @@ def delete_event(request, pk):
         return redirect('org_dashboard')
 
     return render(request, 'organizations/event_confirm_delete.html', {'event': event})
+
+@login_required
+def assign_manager(request, event_pk):
+    if request.user.role != 'organization':
+        messages.error(request, "You don't have access to this page.")
+        return redirect('home')
+
+    organization = get_object_or_404(Organization, user=request.user)
+    event = get_object_or_404(Event, pk=event_pk, organizer=organization)
+
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        try:
+            manager = User.objects.get(username=username, role='event_manager')
+        except User.DoesNotExist:
+            messages.error(request, f'No Event Manager account found with username "{username}".')
+        else:
+            _, created = EventManagerAssignment.objects.get_or_create(event=event, manager=manager)
+            if created:
+                messages.success(request, f"{manager.username} was assigned to this event.")
+            else:
+                messages.info(request, f"{manager.username} is already assigned.")
+        return redirect('assign_manager', event_pk=event.pk)
+
+    assignments = event.manager_assignments.select_related('manager')
+    return render(request, 'organizations/assign_manager.html', {'event': event, 'assignments': assignments})
+
+
+@login_required
+def remove_manager(request, assignment_pk):
+    organization = get_object_or_404(Organization, user=request.user)
+    assignment = get_object_or_404(EventManagerAssignment, pk=assignment_pk, event__organizer=organization)
+    event_pk = assignment.event.pk
+
+    if request.method == 'POST':
+        assignment.delete()
+        messages.success(request, "Manager removed.")
+    return redirect('assign_manager', event_pk=event_pk)

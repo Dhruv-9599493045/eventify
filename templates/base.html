@@ -24,6 +24,8 @@
 
                 {% elif user.role == 'visitor' %}
                     <a class="nav-link" href="{% url 'my_registrations' %}">My Registrations</a>
+                {% elif user.role == 'event_manager' %}
+                    <a class="nav-link" href="{% url 'manager_dashboard' %}">My Events</a>
                 {% endif %}
                 <span class="nav-link text-muted">{{ user.username }}</span>
                 <form method="POST" action="{% url 'logout' %}" class="d-inline m-0">
